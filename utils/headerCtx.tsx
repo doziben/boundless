@@ -7,7 +7,7 @@ type _ctx = {
 
 const headerCtx = React.createContext<_ctx>({
   isLoggedIn: false,
-  setIsLoggedIn: () => {},
+  setIsLoggedIn: (state: boolean) => void {},
 });
 
 export default headerCtx;

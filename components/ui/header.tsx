@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import headerCtx from "../../utils/headerCtx";
+import tw from "twin.macro";
 
 type _props = {
   children: React.ReactNode;
@@ -37,9 +38,11 @@ const Header = (props: _props) => {
         setIsLoggedIn: setIsLoggedIn,
       }}
     >
-      <header>
-        <div>Logo</div>
-        <nav>{isLoggedIn ? logged : notLogged}</nav>
+      <header tw="w-full p-4">
+        <div tw="max-w-7xl mx-[6%]">
+          <div>Logo</div>
+          <nav>{isLoggedIn ? logged : notLogged}</nav>
+        </div>
       </header>
       {props.children}
     </headerCtx.Provider>

@@ -1,4 +1,4 @@
-import GlobalStyles from "./../styles/GlobalStyles";
+import { GlobalStyles } from "twin.macro";
 import type { AppProps } from "next/app";
 import router from "next/router";
 const NProgress = require("nprogress");
