@@ -29,6 +29,10 @@ const Header = (props: _props) => {
   //show on mobile hidden md:show
   const ResponsiveDiv = tw.div`justify-between w-full hidden  md:flex`;
 
+  // const test = styled.div(()=> [
+  //   (showNav) && tw``
+  // ]);
+
   const logged: JSX.Element = (
     <>
       <div>

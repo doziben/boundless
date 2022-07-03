@@ -6,6 +6,7 @@ import heroImg from "../public/Images/heroImg.png";
 import Button from "../components/ui/button";
 import { useRouter } from "next/router";
 import Wrapper from "../components/ui/wrapper";
+import AuthWatcher from "../utils/authWatcher";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -31,7 +32,14 @@ const Home: NextPage = () => {
           </h1>
           <Button
             onClick={() => {
-              router.push("/auth/register");
+              AuthWatcher(
+                () => {
+                  router.push("/app");
+                },
+                () => {
+                  router.push("/auth/register");
+                }
+              );
             }}
             style="secondary"
           >

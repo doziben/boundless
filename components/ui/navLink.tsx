@@ -10,13 +10,15 @@ type _props = {
 
 const NavLink = (props: _props) => {
   const router = useRouter();
-  const styles = {
-    link: `${props.href === router.pathname && props.activeStyle}`,
-  };
+  const active = props.href === router.pathname;
 
   return (
     <Link href={props.href} passHref>
-      <a tw="p-1 font-bold text-sec">{props.children}</a>
+      {active ? (
+        <a tw="font-bold p-1 text-pry">{props.children}</a>
+      ) : (
+        <a tw="font-bold p-1 text-sec">{props.children}</a>
+      )}
     </Link>
   );
 };

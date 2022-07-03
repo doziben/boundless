@@ -5,14 +5,51 @@ import tw from "twin.macro";
 import FacebookIcon from "../icons/facebookIcon";
 import AppleIcon from "../icons/appleIcon";
 import GoogleIcon from "../icons/googleIcon";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { app } from "../../firebase/firebaseConfig";
+import { useRouter } from "next/router";
 
 type _props = {
   type: "login" | "register";
 };
 
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+console.log(auth.currentUser);
+
 const AuthForm = (props: _props) => {
   let login = props.type === "login";
   let register = props.type === "register";
+  const router = useRouter();
+
+  const user = auth.currentUser;
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+      const message = `you are logged In ${user.displayName}`;
+      router.push("/app");
+    } else {
+      router.push("/register");
+    }
+  });
+
+  const googleAuth = (e: React.MouseEvent) => {
+    signInWithPopup(auth, provider).then((result) => {
+      console.log(result);
+
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential && credential.accessToken;
+
+      router.push("/app");
+      //setAppSlice to result.user, push to /app
+    });
+  };
 
   return (
     <section tw="pt-20">
@@ -38,7 +75,7 @@ const AuthForm = (props: _props) => {
             <button>
               <AppleIcon />
             </button>
-            <button>
+            <button onClick={googleAuth}>
               <GoogleIcon />
             </button>
           </div>

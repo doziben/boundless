@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
   authDomain: "boundless-co.firebaseapp.com",
   projectId: "boundless-co",
   storageBucket: process.env.STORAGE_BUCKET,
@@ -13,4 +13,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
+
+export { app };
