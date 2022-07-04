@@ -28,15 +28,6 @@ const Header = (props: _props) => {
   const [showNav, setShowNav] = useState<boolean>(false);
   const router = useRouter();
 
-  useEffect(() => {
-    const auth = getAuth(app);
-    const currentUser = auth.currentUser;
-    const authState = currentUser ? true : false;
-    setIsLoggedIn(() => {
-      return authState;
-    });
-  }, [isLoggedIn]);
-
   const navHandler = (e: React.MouseEvent) => {
     setShowNav((prevState) => {
       return !prevState;
