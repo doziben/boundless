@@ -13,6 +13,8 @@ import {
 } from "firebase/auth";
 import { app } from "../../firebase/firebaseConfig";
 import { useRouter } from "next/router";
+import useAppDispatch from "../../hooks/useAppDispatch";
+import { appActions } from "../../utils/appSlice";
 
 type _props = {
   type: "login" | "register";
@@ -20,34 +22,39 @@ type _props = {
 
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-console.log(auth.currentUser);
 
 const AuthForm = (props: _props) => {
   let login = props.type === "login";
   let register = props.type === "register";
   const router = useRouter();
-
-  const user = auth.currentUser;
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      const message = `you are logged In ${user.displayName}`;
-      router.push("/app");
-    } else {
-    }
-  });
+  const dispatch = useAppDispatch();
 
   const googleAuth = (e: React.MouseEvent) => {
-    signInWithPopup(auth, provider).then((result) => {
-      console.log(result);
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        const userRegDate = new Date(user.metadata.creationTime!);
+        const currentDate = new Date();
 
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential && credential.accessToken;
+        const newUser = userRegDate === currentDate;
+        dispatch(
+          appActions.setUser({
+            email: user.email,
+            name: user.displayName,
+            photoUrl: user.photoURL,
+            uid: user.uid,
+            newUser: newUser,
+          })
+        );
 
-      router.push("/app");
-      //setAppSlice to result.user, push to /app
-    });
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential && credential.accessToken;
+
+        router.push("/app");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

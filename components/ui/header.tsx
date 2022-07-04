@@ -11,19 +11,19 @@ import { useRouter } from "next/router";
 import DashLink from "./dashLink";
 import Notifications from "../dashboard/notifications";
 import Help from "../dashboard/help";
-import { getAuth } from "firebase/auth";
-import { app } from "../../firebase/firebaseConfig";
 import AccountWidget from "../dashboard/accountWidget";
+import useAppSelector from "../../hooks/useAppSelector";
 
 type _props = {
   children: React.ReactNode;
 };
 
-const auth = getAuth(app);
-const currentUser = auth.currentUser;
-const authState = currentUser ? true : false;
-
 const Header = (props: _props) => {
+  const appStore = useAppSelector((store) => {
+    return store.app;
+  });
+
+  const authState = appStore.auth;
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(authState);
   const [showNav, setShowNav] = useState<boolean>(false);
   const router = useRouter();

@@ -5,14 +5,20 @@ import { getAuth, signOut } from "firebase/auth";
 import { app } from "../../firebase/firebaseConfig";
 import { useRouter } from "next/router";
 import headerCtx from "../../utils/headerCtx";
+import useAppSelector from "../../hooks/useAppSelector";
+import useAppDispatch from "../../hooks/useAppDispatch";
+import { appActions } from "../../utils/appSlice";
 //tap into appslice and read data
 
 const AccountWidget = () => {
   const hCtx = useContext(headerCtx);
-  const router = useRouter();
-  const displayName = "Solomon";
-  const avatar =
-    "https://lh3.googleusercontent.com/a-/AOh14Giz2HPunaqdFHAG6gWJJMc6Q9H6zwE50VRjHzX8trs=s96-c";
+  const appStore = useAppSelector((store) => {
+    return store.app;
+  });
+  const dispatch = useAppDispatch();
+
+  const displayName = appStore.user!.name;
+  const avatar = appStore.user!.photoUrl!;
 
   const StyledDiv = tw.div`flex flex-col gap-0 justify-start`;
   const auth = getAuth(app);
@@ -21,7 +27,7 @@ const AccountWidget = () => {
     signOut(auth)
       .then(() => {
         hCtx.setIsLoggedIn(false);
-
+        dispatch(appActions.logOut());
         //setUser in appSlice to null
       })
       .catch((error) => {

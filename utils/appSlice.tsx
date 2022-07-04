@@ -5,11 +5,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getAuth } from "firebase/auth";
 import { app } from "../firebase/firebaseConfig";
+import AuthWatcher from "./authWatcher";
 
-type _user = {
-  uid: string;
-  name: string;
-  email: string;
+export type _user = {
+  uid: string | null;
+  name: string | null;
+  email: string | null;
+  photoUrl: string | null;
+  newUser: boolean | null;
 };
 
 type _state = {
@@ -30,7 +33,10 @@ const appSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state: _state, action: PayloadAction<_user>) => {
-      state = { auth: currentUser, user: action.payload };
+      return (state = { auth: true, user: action.payload });
+    },
+    logOut: (state: _state) => {
+      return (state = { auth: false, user: null });
     },
   },
 });
