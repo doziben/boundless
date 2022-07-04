@@ -1,5 +1,4 @@
-import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import headerCtx from "../../utils/headerCtx";
 import tw from "twin.macro";
 import logo from "../../public/SVGs/Boundless.svg";
@@ -9,15 +8,34 @@ import NavLink from "./navLink";
 import styled from "twin.macro";
 import Button from "./button";
 import { useRouter } from "next/router";
+import DashLink from "./dashLink";
+import Notifications from "../dashboard/notifications";
+import Help from "../dashboard/help";
+import { getAuth } from "firebase/auth";
+import { app } from "../../firebase/firebaseConfig";
+import AccountWidget from "../dashboard/accountWidget";
 
 type _props = {
   children: React.ReactNode;
 };
 
+const auth = getAuth(app);
+const currentUser = auth.currentUser;
+const authState = currentUser ? true : false;
+
 const Header = (props: _props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(authState);
   const [showNav, setShowNav] = useState<boolean>(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const auth = getAuth(app);
+    const currentUser = auth.currentUser;
+    const authState = currentUser ? true : false;
+    setIsLoggedIn(() => {
+      return authState;
+    });
+  }, [isLoggedIn]);
 
   const navHandler = (e: React.MouseEvent) => {
     setShowNav((prevState) => {
@@ -27,7 +45,7 @@ const Header = (props: _props) => {
 
   //Controls nav behavior on mobile - navStateOpen && shownav -hiddem initially
   //show on mobile hidden md:show
-  const ResponsiveDiv = tw.div`justify-between w-full hidden  md:flex`;
+  const ResponsiveDiv = tw.div`justify-between w-full hidden items-center md:flex`;
 
   // const test = styled.div(()=> [
   //   (showNav) && tw``
@@ -35,12 +53,23 @@ const Header = (props: _props) => {
 
   const logged: JSX.Element = (
     <>
-      <div>
-        <NavLink href="/app/">Dashboard</NavLink>
-        <Link href="/app/jobs">Jobs</Link>
-        <Link href="/app/settings">Settings</Link>
+      <div tw="md:hidden w-full flex justify-end">
+        <MenuButton onClick={navHandler} />
       </div>
-      <div>icons usercard</div>
+      <ResponsiveDiv>
+        <div tw="flex gap-2">
+          <DashLink href="/app">Dashboard</DashLink>
+          <DashLink href="/app/jobs">Jobs</DashLink>
+          <DashLink href="/app/settings">Settings</DashLink>
+        </div>
+        <div tw="flex gap-7">
+          <div tw="flex gap-2 items-center">
+            <Notifications />
+            <Help />
+          </div>
+          <AccountWidget />
+        </div>
+      </ResponsiveDiv>
     </>
   );
 

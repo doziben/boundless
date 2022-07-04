@@ -17,12 +17,13 @@ const App: NextPage = () => {
       // ...
     },
     () => {
-      router.push("/login");
+      router.push("/");
     }
   );
 
   return (
     <div tw="bg-[#fafafa] min-h-[100vh] w-full">
+      {/* if auth isn't true, showloading state */}
       <Wrapper>App</Wrapper>
     </div>
   );

@@ -3,6 +3,8 @@
 //will hold setter function for setting user
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { getAuth } from "firebase/auth";
+import { app } from "../firebase/firebaseConfig";
 
 type _user = {
   uid: string;
@@ -15,6 +17,9 @@ type _state = {
   user?: _user | null;
 };
 
+const auth = getAuth(app);
+let currentUser = auth.currentUser ? true : false;
+
 const initialState: _state = {
   auth: false,
   user: null,
@@ -25,7 +30,7 @@ const appSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state: _state, action: PayloadAction<_user>) => {
-      state = { auth: true, user: action.payload };
+      state = { auth: currentUser, user: action.payload };
     },
   },
 });

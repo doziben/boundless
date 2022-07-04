@@ -35,7 +35,6 @@ const AuthForm = (props: _props) => {
       const message = `you are logged In ${user.displayName}`;
       router.push("/app");
     } else {
-      router.push("/register");
     }
   });
 
