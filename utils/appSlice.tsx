@@ -3,9 +3,6 @@
 //will hold setter function for setting user
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getAuth } from "firebase/auth";
-import { app } from "../firebase/firebaseConfig";
-import AuthWatcher from "./authWatcher";
 
 export type _user = {
   uid: string | null;
@@ -19,9 +16,6 @@ type _state = {
   auth: boolean;
   user?: _user | null;
 };
-
-const auth = getAuth(app);
-let currentUser = auth.currentUser ? true : false;
 
 const initialState: _state = {
   auth: false,

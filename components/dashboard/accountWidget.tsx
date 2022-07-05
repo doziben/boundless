@@ -17,8 +17,8 @@ const AccountWidget = () => {
   });
   const dispatch = useAppDispatch();
 
-  const displayName = appStore.user!.name;
-  const avatar = appStore.user!.photoUrl!;
+  const displayName = appStore.user && appStore.user!.name;
+  const avatar = appStore.user! && appStore.user!.photoUrl!;
 
   const StyledDiv = tw.div`flex flex-col gap-0 justify-start`;
   const auth = getAuth(app);
@@ -36,25 +36,32 @@ const AccountWidget = () => {
   };
 
   return (
-    <div tw="flex gap-1">
-      <div tw="rounded-full overflow-hidden w-[40px] h-[40px]">
-        <Image
-          src={avatar}
-          loader={({ src }) => {
-            return src;
-          }}
-          width="40px"
-          height="40px"
-          alt="boundless user"
-        />
-      </div>
-      <StyledDiv>
-        <p>{displayName}</p>
-        <button onClick={signOutHandler} tw="text-xs text-blue-600 text-left">
-          Sign Out
-        </button>
-      </StyledDiv>
-    </div>
+    <>
+      {appStore.user && (
+        <div tw="flex gap-1">
+          <div tw="rounded-full overflow-hidden w-[40px] h-[40px]">
+            <Image
+              src={avatar}
+              loader={({ src }) => {
+                return src;
+              }}
+              width="40px"
+              height="40px"
+              alt="boundless user"
+            />
+          </div>
+          <StyledDiv>
+            <p>{displayName}</p>
+            <button
+              onClick={signOutHandler}
+              tw="text-xs text-blue-600 text-left"
+            >
+              Sign Out
+            </button>
+          </StyledDiv>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -22,7 +22,8 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "typed.js": "^2.0.12"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.9.2",
