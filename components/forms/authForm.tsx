@@ -9,7 +9,6 @@ import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
-  onAuthStateChanged,
 } from "firebase/auth";
 import { app } from "../../firebase/firebaseConfig";
 import { useRouter } from "next/router";
