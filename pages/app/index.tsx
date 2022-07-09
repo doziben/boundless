@@ -30,14 +30,7 @@ const App: NextPage = () => {
   return (
     <div tw="bg-[#fafafa] min-h-[100vh] w-full">
       {/* if auth isn't true, showloading state */}
-      <Wrapper>App</Wrapper>
-      <button
-        onClick={() => {
-          console.log(appStore);
-        }}
-      >
-        TEst
-      </button>
+      <Wrapper>App Create a general tw styled div for all dash cards</Wrapper>
     </div>
   );
 };

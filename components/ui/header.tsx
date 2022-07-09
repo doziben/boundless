@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import headerCtx from "../../utils/headerCtx";
 import tw from "twin.macro";
+import styled from "@emotion/styled";
 import logo from "../../public/SVGs/Boundless.svg";
 import Image from "next/image";
 import MenuButton from "./menuButton";
 import NavLink from "./navLink";
-import styled from "twin.macro";
 import Button from "./button";
 import { useRouter } from "next/router";
 import DashLink from "./dashLink";
@@ -38,9 +38,14 @@ const Header = (props: _props) => {
   //show on mobile hidden md:show
   const ResponsiveDiv = tw.div`justify-between w-full hidden items-center md:flex`;
 
-  // const test = styled.div(()=> [
-  //   (showNav) && tw``
-  // ]);
+  interface ContainerProps {
+    hasBg?: string;
+  }
+
+  const Container = styled.div(({ hasBg }: ContainerProps) => [
+    tw`flex w-full`, // Add base styles first
+    hasBg && tw`bg-black`, // Then add conditional styles
+  ]);
 
   const logged: JSX.Element = (
     <>

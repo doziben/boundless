@@ -1,6 +1,9 @@
 import { NextPage } from "next";
 import Head from "next/head";
 
+//query jobId from route and portal a jobModal to screen
+//onClick => createportal(<jobmodal id={router.query.jobId}/>)
+
 const Explore: NextPage = () => {
   return (
     <>
