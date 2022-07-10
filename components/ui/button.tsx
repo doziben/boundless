@@ -1,11 +1,11 @@
 import tw from "twin.macro";
 
-type _props = {
+interface _props {
   children: React.ReactNode;
   onClick: React.MouseEventHandler;
   style: "primary" | "secondary";
   type?: "submit" | "reset";
-};
+}
 
 const Button = (props: _props) => {
   return (

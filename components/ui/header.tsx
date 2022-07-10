@@ -13,6 +13,7 @@ import Notifications from "../dashboard/notifications";
 import Help from "../dashboard/help";
 import AccountWidget from "../dashboard/accountWidget";
 import useAppSelector from "../../hooks/useAppSelector";
+import StateWatcher from "../../utils/StateWatcher";
 
 type _props = {
   children: React.ReactNode;
@@ -24,6 +25,7 @@ const Header = (props: _props) => {
   });
 
   const authState = appStore.auth;
+
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(authState);
   const [showNav, setShowNav] = useState<boolean>(false);
   const router = useRouter();
@@ -101,20 +103,22 @@ const Header = (props: _props) => {
         setIsLoggedIn: setIsLoggedIn,
       }}
     >
-      {!loginState && (
-        <header tw="w-full py-4 backdrop-blur-md border border-b-[#d5d5d5]">
-          <div tw="max-w-7xl px-[6%] mx-auto flex justify-between">
-            <div tw="flex-[2]">
-              <Image src={logo} alt="Boundless Logo" />
-            </div>
+      <StateWatcher>
+        {!loginState && (
+          <header tw="w-full py-4 backdrop-blur-md border border-b-[#d5d5d5]">
+            <div tw="max-w-7xl px-[6%] mx-auto flex justify-between">
+              <div tw="flex-[2]">
+                <Image src={logo} alt="Boundless Logo" />
+              </div>
 
-            <nav tw="flex items-center flex-[3]">
-              {isLoggedIn ? logged : notLogged}
-            </nav>
-          </div>
-        </header>
-      )}
-      {props.children}
+              <nav tw="flex items-center flex-[3]">
+                {isLoggedIn ? logged : notLogged}
+              </nav>
+            </div>
+          </header>
+        )}
+        {props.children}
+      </StateWatcher>
     </headerCtx.Provider>
   );
 };

@@ -1,13 +1,16 @@
+import tw from "twin.macro";
+
 const GoogleIcon = () => {
   return (
     <svg
       width="72"
+      tw=" rounded-full bg-[#fafafa] hover:(bg-blue-100)"
       height="72"
       viewBox="0 0 72 72"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect width="72" height="72" rx="36" fill="#FAFAFA" />
+      <rect width="72" height="72" rx="36" fill="" />
       <path
         fillRule="evenodd"
         clipRule="evenodd"

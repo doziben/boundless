@@ -5,11 +5,7 @@ import tw from "twin.macro";
 import FacebookIcon from "../icons/facebookIcon";
 import AppleIcon from "../icons/appleIcon";
 import GoogleIcon from "../icons/googleIcon";
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../../firebase/firebaseConfig";
 import { useRouter } from "next/router";
 import useAppDispatch from "../../hooks/useAppDispatch";
@@ -50,6 +46,7 @@ const AuthForm = (props: _props) => {
         const token = credential && credential.accessToken;
 
         router.push("/app");
+        console.log(result);
       })
       .catch((error) => {
         console.log(error);

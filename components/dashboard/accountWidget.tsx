@@ -3,7 +3,6 @@ import Image from "next/image";
 import React, { useContext } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "../../firebase/firebaseConfig";
-import { useRouter } from "next/router";
 import headerCtx from "../../utils/headerCtx";
 import useAppSelector from "../../hooks/useAppSelector";
 import useAppDispatch from "../../hooks/useAppDispatch";
@@ -19,6 +18,8 @@ const AccountWidget = () => {
 
   const displayName = appStore.user && appStore.user!.name;
   const avatar = appStore.user! && appStore.user!.photoUrl!;
+
+  const firstName = displayName?.split(" ")[0];
 
   const StyledDiv = tw.div`flex flex-col gap-0 justify-start`;
   const auth = getAuth(app);
@@ -51,7 +52,7 @@ const AccountWidget = () => {
             />
           </div>
           <StyledDiv>
-            <p>{displayName}</p>
+            <p>{firstName}</p>
             <button
               onClick={signOutHandler}
               tw="text-xs text-blue-600 text-left"
