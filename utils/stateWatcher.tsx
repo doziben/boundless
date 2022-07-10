@@ -10,6 +10,8 @@ import React, { useEffect } from "react";
 
 interface _props {
   children: React.ReactNode;
+  truthyHandler?: () => void;
+  falsyHandler?: () => void;
 }
 
 const StateWatcher = (props: _props) => {
@@ -35,8 +37,12 @@ const StateWatcher = (props: _props) => {
             newUser: newUser,
           })
         );
+
+        props.truthyHandler && props.truthyHandler;
       },
-      () => {}
+      () => {
+        props.falsyHandler && props.falsyHandler;
+      }
     );
   });
 

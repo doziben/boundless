@@ -5,6 +5,7 @@ import Header from "../components/ui/header";
 import Head from "next/head";
 import { Provider } from "react-redux";
 import { store } from "../utils/store";
+import StateWatcher from "../utils/stateWatcher";
 
 const NProgress = require("nprogress");
 
@@ -32,7 +33,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
         </Head>
         <GlobalStyles />
-        <Component {...pageProps} />
+        <StateWatcher>
+          <Component {...pageProps} />
+        </StateWatcher>
       </Header>
     </Provider>
   );

@@ -12,7 +12,7 @@ const Button = (props: _props) => {
     <>
       {props.style === "primary" && (
         <button
-          tw="px-8 py-3 bg-pry   text-white font-bold rounded-lg hover:(bg-[#fafafa] text-pry)"
+          tw="px-8 py-3 bg-pry   text-white font-bold rounded-lg hover:(bg-[#454545])"
           onClick={props.onClick}
           type={props.type}
         >

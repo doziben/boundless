@@ -10,6 +10,7 @@ import { app } from "../../firebase/firebaseConfig";
 import { useRouter } from "next/router";
 import useAppDispatch from "../../hooks/useAppDispatch";
 import { appActions } from "../../utils/appSlice";
+import AuthWatcher from "../../utils/authWatcher";
 
 type _props = {
   type: "login" | "register";
@@ -52,6 +53,14 @@ const AuthForm = (props: _props) => {
         console.log(error);
       });
   };
+
+  AuthWatcher(
+    () => {
+      //set loading state
+      router.push("/app");
+    },
+    () => {}
+  );
 
   return (
     <section tw="pt-20">
