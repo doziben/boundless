@@ -8,13 +8,17 @@ interface _props {
 //STYLES
 const StatTitle = tw.h3`text-lg font-bold`;
 const StyledDiv = tw.div`mt-4`;
-const StatWrapper = tw(StyledDiv)``;
+const StatWrapper = tw(StyledDiv)`flex gap-2 flex-wrap`;
 
 const TagStats = (props: _props) => {
+  const tags = props.values.map((value) => (
+    <JobTag key={value} title={value} />
+  ));
+
   return (
     <>
       <StatTitle>Tags</StatTitle>
-      <StatWrapper>{/* Map values into jobtag items */}</StatWrapper>
+      <StatWrapper>{tags}</StatWrapper>
     </>
   );
 };

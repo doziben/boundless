@@ -13,6 +13,7 @@ import Notifications from "../dashboard/notifications";
 import Help from "../dashboard/help";
 import AccountWidget from "../dashboard/accountWidget";
 import useAppSelector from "../../hooks/useAppSelector";
+import AuthWatcher from "../../utils/authWatcher";
 // import StateWatcher from "../../utils/stateWatcher";
 
 type _props = {
@@ -84,7 +85,7 @@ const Header = (props: _props) => {
         <Button
           style="primary"
           onClick={() => {
-            router.push("/auth/register");
+            router.push(authState ? "/app" : "/auth/register");
           }}
         >
           {authState ? "My Account" : "Try it out"}

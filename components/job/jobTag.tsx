@@ -8,7 +8,9 @@ interface _props {
 const JobTag = (props: _props) => {
   return (
     <Link href={`/explore/?tag=${props.title}`} passHref>
-      <a tw="p-2 bg-[#fafafa] hover:(bg-blue-100)">{props.title}</a>
+      <a tw="p-2 rounded-2xl text-sm font-bold bg-[#fafafa] hover:(bg-blue-100)">
+        {props.title}
+      </a>
     </Link>
   );
 };

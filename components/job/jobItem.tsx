@@ -1,29 +1,54 @@
+import styled from "@emotion/styled";
 import tw from "twin.macro";
+import JobIcon from "../icons/jobIcon";
 import OptionsMenu from "../ui/optionsMenu";
+import JobTag from "./jobTag";
 
-export interface _jobProps {}
+export interface _jobProps {
+  id: string;
+  title: string;
+  applicants: number;
+  status: "Open" | "Closed";
+  tags: string[];
+  dateCreated: Date;
+}
 
 const StyledDiv = tw.div`flex w-full py-3 rounded-xl border border-[#d5d5d5]`;
-const ParentDiv = tw.div`border w-full border-l-pry border-b-0 border-r-0 border-t-0  border-l-2 px-3 flex justify-between items-center`;
+// const ParentDiv = tw.div`border w-full border-l-pry border-b-0 border-r-0 border-t-0  border-l-2 px-3 flex justify-between items-center`;
 const Flex = tw.div`flex gap-2 items-center`;
+const TagsFlex = tw.div`hidden md:(flex gap-2 items-center)`;
+
+interface jobStatus {
+  jobOpen: boolean;
+}
+
+const ParentDiv = styled.div(({ jobOpen }: jobStatus) => [
+  tw`border w-full border-b-0 border-r-0 border-t-0  border-l-2 px-3 flex justify-between items-center`,
+  jobOpen ? tw`border-l-blue-500` : tw`border-l-pry`,
+]);
 
 const JobItem = (props: _jobProps) => {
+  const today = props.dateCreated.toDateString() === new Date().toDateString();
+  const time = props.dateCreated.toLocaleTimeString();
+  const date = today ? "Today" : props.dateCreated.toDateString();
+  const jobStatus = props.status === "Open";
+  let tags = props.tags.map((tag) => <JobTag key={tag} title={tag} />);
+
   return (
     <StyledDiv>
-      <ParentDiv>
+      <ParentDiv jobOpen={jobStatus}>
         <Flex>
-          <UserIcon />
+          <JobIcon state={props.status} />
           <div>
             <p>{props.title}</p>
-            <p tw="text-sm text-sec">{props.invite}</p>
+            <p tw="text-sm text-sec">{date}</p>
           </div>
         </Flex>
 
+        <TagsFlex>{tags}</TagsFlex>
+
         <Flex>
-          <div tw="text-right">
-            <p tw="text-sec">{time}</p>
-            <p tw="text-sm text-blue-500">{date}</p>
-          </div>
+          <p tw="text-sm text-blue-500">{props.applicants} Applicants</p>
           <OptionsMenu>{}</OptionsMenu>
         </Flex>
       </ParentDiv>

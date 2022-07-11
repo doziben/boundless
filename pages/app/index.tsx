@@ -13,6 +13,7 @@ import { _scheduleProps } from "../../components/schedule/scheduleItem";
 import HiresStats from "../../components/dashboard/hiresStats";
 import OpenJobStats from "../../components/dashboard/openJobsStats";
 import TagStats from "../../components/dashboard/tagStats";
+import { _jobProps } from "../../components/job/jobItem";
 
 //STYLES
 const CardDiv = tw.div`bg-white shadow-xl rounded-xl p-6`;
@@ -31,6 +32,51 @@ const schedules: _scheduleProps[] = [
     title: "React Native Developer",
   },
 ];
+
+const jobs: _jobProps[] = [
+  {
+    applicants: 23,
+    dateCreated: new Date(),
+    id: Math.random().toString(),
+    status: "Open",
+    tags: ["React Js", "Angular", "Animation"],
+    title: "Junior Developer",
+  },
+  {
+    applicants: 12,
+    dateCreated: new Date("7/10/2022, 1:18:03 PM"),
+    id: Math.random().toString(),
+    status: "Closed",
+    tags: ["UX Design", "Design"],
+    title: "UI Designer",
+  },
+  {
+    applicants: 16,
+    dateCreated: new Date(),
+    id: Math.random().toString(),
+    status: "Open",
+    tags: ["Blender", "Cinema 4d", "Animation"],
+    title: "3d Designer",
+  },
+  {
+    applicants: 4,
+    dateCreated: new Date("5/14/2022, 1:18:03 PM"),
+    id: Math.random().toString(),
+    status: "Open",
+    tags: ["Motion Designer", "Animation"],
+    title: "Animator",
+  },
+];
+
+const tagStats: string[] = [
+  "React Js",
+  "Angular",
+  "UI",
+  "Graphics",
+  "Animation",
+  "TailwindCSS",
+];
+
 const App: NextPage = () => {
   const router = useRouter();
   const hCtx = useContext(headerCtx);
@@ -72,12 +118,12 @@ const App: NextPage = () => {
               <HiresStats />
             </HiresDiv>
             <TagsDiv>
-              <TagStats values={[]} />
+              <TagStats values={tagStats} />
             </TagsDiv>
           </Flex>
 
           <CardDiv>
-            <OpenJobStats />
+            <OpenJobStats values={jobs} />
           </CardDiv>
         </div>
       </AppWrapper>
