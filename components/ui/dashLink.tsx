@@ -10,7 +10,10 @@ type _props = {
 const DashLink = (props: _props) => {
   const router = useRouter();
   const path = router.pathname;
-  const active = path.includes(props.href);
+  const appLink = props.href === "/app";
+  const appPath = appLink && path === "/app";
+  const otherPath = !appPath && !appLink && path.includes(props.href);
+  const active = appPath || otherPath;
 
   return (
     <Link href={props.href} passHref>

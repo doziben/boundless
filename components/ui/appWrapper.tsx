@@ -5,11 +5,12 @@ import tw from "twin.macro";
 
 interface _props {
   children: React.ReactNode;
+  ignoreMargin?: boolean;
 }
 const AppWrapper = (props: _props) => {
   return (
     <div tw="bg-[#fafafa] min-h-[100vh] w-full">
-      <Wrapper>
+      <Wrapper ignoreMargin={props.ignoreMargin}>
         <div tw="py-6">{props.children}</div>
       </Wrapper>
     </div>

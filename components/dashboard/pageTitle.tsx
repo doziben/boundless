@@ -1,7 +1,7 @@
 import Wrapper from "../ui/wrapper";
 import tw from "twin.macro";
 import Button from "../ui/button";
-import { MouseEventHandler } from "react";
+import styled from "@emotion/styled";
 
 type _props = {
   title: string;
@@ -10,11 +10,19 @@ type _props = {
   buttonHandler?: React.MouseEventHandler;
 };
 
+interface style {
+  haveChild?: boolean;
+}
+
 const StyledDiv = tw.div`flex justify-between items-center`;
+const ParentDiv = styled.section(({ haveChild }: style) => [
+  tw`bg-white w-full `,
+  haveChild ? tw`pt-8` : tw`py-8`,
+]);
 
 const PageTitle = (props: _props) => {
   return (
-    <div tw="bg-white w-full py-8">
+    <ParentDiv haveChild={props.children !== undefined}>
       <Wrapper>
         <StyledDiv>
           <h1 tw="text-2xl lg:(text-4xl)">{props.title}</h1>
@@ -24,9 +32,9 @@ const PageTitle = (props: _props) => {
             </Button>
           )}
         </StyledDiv>
-        {props.children && props.children}
+        {props.children && <div tw="mt-6"> {props.children}</div>}
       </Wrapper>
-    </div>
+    </ParentDiv>
   );
 };
 

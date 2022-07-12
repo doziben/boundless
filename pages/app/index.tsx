@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import headerCtx from "../../utils/headerCtx";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import AuthWatcher from "../../utils/authWatcher";
 import tw from "twin.macro";
 import useAppSelector from "../../hooks/useAppSelector";
@@ -9,11 +9,10 @@ import AppWrapper from "../../components/ui/appWrapper";
 import PageTitle from "../../components/dashboard/pageTitle";
 import JobStats from "../../components/dashboard/jobStats";
 import UpcomingStats from "../../components/dashboard/upcomingStats";
-import { _scheduleProps } from "../../components/schedule/scheduleItem";
 import HiresStats from "../../components/dashboard/hiresStats";
 import OpenJobStats from "../../components/dashboard/openJobsStats";
 import TagStats from "../../components/dashboard/tagStats";
-import { _jobProps } from "../../components/job/jobItem";
+import { jobs, schedules, tagStats } from "../../utils/dummy-data";
 
 //STYLES
 const CardDiv = tw.div`bg-white shadow-xl rounded-xl p-6`;
@@ -24,58 +23,6 @@ const HiresDiv = tw(CardDiv)`flex-[3]`;
 const TagsDiv = tw(CardDiv)`flex-[1]`;
 
 const Flex = tw.div`flex flex-col gap-4 md:(flex-row justify-between)`;
-
-const schedules: _scheduleProps[] = [
-  {
-    date: new Date("7/10/2022, 1:18:03 PM"),
-    invite: "Carl Max",
-    title: "React Native Developer",
-  },
-];
-
-const jobs: _jobProps[] = [
-  {
-    applicants: 23,
-    dateCreated: new Date(),
-    id: Math.random().toString(),
-    status: "Open",
-    tags: ["React Js", "Angular", "Animation"],
-    title: "Junior Developer",
-  },
-  {
-    applicants: 12,
-    dateCreated: new Date("7/10/2022, 1:18:03 PM"),
-    id: Math.random().toString(),
-    status: "Closed",
-    tags: ["UX Design", "Design"],
-    title: "UI Designer",
-  },
-  {
-    applicants: 16,
-    dateCreated: new Date(),
-    id: Math.random().toString(),
-    status: "Open",
-    tags: ["Blender", "Cinema 4d", "Animation"],
-    title: "3d Designer",
-  },
-  {
-    applicants: 4,
-    dateCreated: new Date("5/14/2022, 1:18:03 PM"),
-    id: Math.random().toString(),
-    status: "Open",
-    tags: ["Motion Designer", "Animation"],
-    title: "Animator",
-  },
-];
-
-const tagStats: string[] = [
-  "React Js",
-  "Angular",
-  "UI",
-  "Graphics",
-  "Animation",
-  "TailwindCSS",
-];
 
 const App: NextPage = () => {
   const router = useRouter();
@@ -98,11 +45,19 @@ const App: NextPage = () => {
     }
   );
 
+  const createJobHandler: React.MouseEventHandler = () => {
+    router.push("/app/jobs/create");
+  };
+
   return (
     <>
       {/* if auth from appSlice isn't true, showloading state */}
-      <PageTitle title="Dashboard" button="Create +" />
-      <AppWrapper>
+      <PageTitle
+        title="Dashboard"
+        button="Create +"
+        buttonHandler={createJobHandler}
+      />
+      <AppWrapper ignoreMargin>
         <div tw="flex w-full flex-col gap-4">
           <Flex>
             <JobStatDiv>
