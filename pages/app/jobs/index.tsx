@@ -9,6 +9,8 @@ import { Card, CardHeading } from "../../../components/ui/card";
 import tw from "twin.macro";
 import styled from "@emotion/styled";
 import TabItem, { _tabProps } from "../../../components/ui/tabItem";
+import SearchBar from "../../../components/dashboard/searchBar";
+import SelectMenu from "../../../components/ui/selectMenu";
 
 export interface _tabState {
   id: "A" | "B" | "C";
@@ -18,12 +20,16 @@ export interface _tabState {
 interface _styled {
   spaceBetween?: boolean;
   gap?: boolean;
+  margin?: boolean;
+  colMobile?: boolean;
 }
 //STYLES
-const Flex = styled.div(({ spaceBetween, gap }: _styled) => [
-  tw`flex items-center mb-8`,
+const Flex = styled.div(({ spaceBetween, gap, margin, colMobile }: _styled) => [
+  tw`flex items-center`,
   spaceBetween && tw`justify-between`,
+  margin && tw`mb-8`,
   gap && tw`gap-2`,
+  colMobile && tw`flex flex-col gap-4 `,
 ]);
 
 const TabsDiv = tw.div`flex justify-between w-full md:(gap-4 justify-start)`;
@@ -84,13 +90,13 @@ const Jobs: NextPage = () => {
         ? ((jobTabs = jobs.filter((job) => {
             return job.status === "Open";
           })),
-          (tabTitle = "Open"))
+          (tabTitle = "Open Jobs"))
         : null,
       tabState.id === "C" && tabState.state
         ? ((jobTabs = jobs.filter((job) => {
             return job.status === "Closed";
           })),
-          (tabTitle = "Closed"))
+          (tabTitle = "Closed Jobs"))
         : null
     )
   );
@@ -116,12 +122,20 @@ const Jobs: NextPage = () => {
       </PageTitle>
       <AppWrapper ignoreMargin>
         <Card type="full">
-          <Flex spaceBetween={true}>
+          <Flex spaceBetween margin colMobile>
             <CardHeading>{tabTitle}</CardHeading>
-            <Flex gap={true}>{/* Render Dropdown and searchbox */}</Flex>
+            <Flex gap>
+              <SelectMenu title="2022" />
+              <SearchBar
+                onSearch={(e) => {
+                  console.log(e);
+                }}
+                placeholder="Search in jobs..."
+              />
+            </Flex>
           </Flex>
 
-          <div tw="flex flex-col gap-3 w-full">
+          <div tw="flex flex-col gap-5 w-full">
             {jobTabs.map((job) => (
               <JobItem
                 applicants={job.applicants}

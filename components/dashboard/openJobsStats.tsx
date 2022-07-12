@@ -9,7 +9,7 @@ interface _props {
 const StatTitle = tw.h3`text-lg font-bold`;
 const StyledDiv = tw.div`mt-4`;
 const StatHeader = tw.div`flex w-full justify-between items-center`;
-const StatWrapper = tw(StyledDiv)`flex flex-col gap-3 w-full`;
+const StatWrapper = tw(StyledDiv)`flex flex-col gap-5 w-full`;
 
 const OpenJobStats = (props: _props) => {
   let values = props.values.filter((job) => {
