@@ -7,7 +7,7 @@ interface _props {
 
 const SelectMenu = (props: _props) => {
   return (
-    <div tw="flex gap-2 items-center rounded-2xl px-3 py-2 border border-[#d5d5d5]">
+    <div tw="flex gap-2 items-center rounded-2xl px-3 py-2 border">
       <p tw="text-sm">{props.title}</p> <CaretIcon />
     </div>
   );

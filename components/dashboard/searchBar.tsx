@@ -14,7 +14,7 @@ interface styles {
 
 //STYLES
 const StyledForm = styled.form(({ active }: styles) => [
-  tw`flex rounded-2xl border px-3 py-2 max-w-[18rem] border-[#d5d5d5] `,
+  tw`flex rounded-2xl border px-3 py-2 max-w-[18rem]`,
   active && tw`border-blue-500`,
 ]);
 const SearchBar = (props: _props) => {

@@ -105,7 +105,7 @@ const Header = (props: _props) => {
       }}
     >
       {!loginState && (
-        <header tw="w-full py-4 backdrop-blur-md border border-b-[#d5d5d5]">
+        <header tw="w-full py-4 backdrop-blur-md border ">
           <div tw="max-w-7xl px-[6%] mx-auto flex justify-between">
             <div tw="flex-[2]">
               <Image src={logo} alt="Boundless Logo" />

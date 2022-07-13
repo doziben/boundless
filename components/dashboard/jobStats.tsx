@@ -8,7 +8,7 @@ interface _props {
 const CardTitle = tw.h3`text-lg font-bold`;
 const Value = tw.h2`text-xl font-bold`;
 const ValueTitle = tw.p`text-sm text-sec`;
-const StyledDiv = tw.div`flex w-full justify-between mt-4 items-center p-3 rounded-xl border border-[#d5d5d5]`;
+const StyledDiv = tw.div`flex w-full justify-between mt-4 items-center p-3 rounded-xl border `;
 
 const JobStats = (props: _props) => {
   let values = [
