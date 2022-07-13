@@ -16,7 +16,7 @@ const CardHeading = tw.h2`text-xl lg:(text-2xl)`;
 
 const Card = (props: _props) => {
   const StyledDiv = styled.div(({ type }: _styled) => [
-    tw`bg-white p-6 md:(p-12) rounded-lg mt-4 shadow-xl`,
+    tw`bg-white p-6 md:(p-12) rounded-lg mt-4 shadow`,
     type === "full" && tw`w-full`,
     type === "xl" && tw`max-w-[558px]`,
   ]);

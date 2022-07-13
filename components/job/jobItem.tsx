@@ -15,7 +15,7 @@ export interface _jobProps {
 
 //STYLES
 const StyledDiv = tw.div`flex w-full py-3 rounded-xl border`;
-const Flex = tw.div`flex gap-2 items-center`;
+const Flex = tw.div`flex gap-4 items-center`;
 const TagsFlex = tw.div`hidden md:(flex gap-2 items-center)`;
 const ParentDiv = styled.div(({ jobOpen }: jobStatus) => [
   tw`border w-full border-b-0 border-r-0 border-t-0  border-l-2 px-3 flex justify-between items-center`,

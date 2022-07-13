@@ -15,7 +15,7 @@ import TagStats from "../../components/dashboard/tagStats";
 import { jobs, schedules, tagStats } from "../../utils/dummy-data";
 
 //STYLES
-const CardDiv = tw.div`bg-white shadow-xl rounded-xl p-6`;
+const CardDiv = tw.div`bg-white shadow rounded-xl p-6`;
 const JobStatDiv = tw(CardDiv)`flex-[1]`;
 const ScheduleDiv = tw(CardDiv)`flex-[2]`;
 
