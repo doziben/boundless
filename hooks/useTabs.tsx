@@ -14,11 +14,6 @@ const useTabs = (extras?: useTabProps) => {
   const initialState: _tabState[] = [{ id: "A", state: true }];
 
   const [tabState, setTabState] = useState<_tabState[]>(initialState);
-  const falseStates: _tabState[] = [
-    { id: "A", state: false },
-    { id: "B", state: false },
-    { id: "C", state: false },
-  ];
 
   //Extrahandlers
   const extraFn = extras && extras.extraHandlers;
