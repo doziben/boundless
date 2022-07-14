@@ -10,7 +10,7 @@ interface useTabProps {
   extraHandlers?: { A: () => void; B: () => void; C: () => void };
 }
 
-const useTabs = ({ extraHandlers }: useTabProps) => {
+const useTabs = (extras?: useTabProps) => {
   const initialState: _tabState[] = [{ id: "A", state: true }];
 
   const [tabState, setTabState] = useState<_tabState[]>(initialState);
@@ -20,35 +20,32 @@ const useTabs = ({ extraHandlers }: useTabProps) => {
     { id: "C", state: false },
   ];
 
-  //Extrahandlers destructuring
-  const { A, B, C } = extraHandlers!;
+  //Extrahandlers
+  const extraFn = extras && extras.extraHandlers;
+  const A = extraFn?.A;
+  const B = extraFn?.B;
+  const C = extraFn?.C;
 
   //Optional setter function for when any of these states are
   //active (optional)
-  extraHandlers &&
+  extraFn &&
     tabState.map(
       (tab) => (
-        tab.id === "A" && tab.state && A(),
-        tab.id === "B" && tab.state && B(),
-        tab.id === "C" && tab.state && C()
+        tab.id === "A" && tab.state && A && A(),
+        tab.id === "B" && tab.state && B && B(),
+        tab.id === "C" && tab.state && C && C()
       )
     );
 
   //State setter function definition
   const sampleState = tabState[0];
   const stateFunction = (id: typeof sampleState.id) => {
-    return setTabState(() => {
-      return [...falseStates, { id: id, state: true }];
+    setTabState(() => {
+      return [{ id: id, state: true }];
     });
   };
 
-  //Pass in ids into StateSetter function for export
-  const SetA = stateFunction("A");
-  const SetB = stateFunction("B");
-  const SetC = stateFunction("C");
-
-  const stateSetters = { SetA, SetB, SetC };
-  return [tabState, stateSetters];
+  return { tabState, stateFunction };
 };
 
 export default useTabs;
