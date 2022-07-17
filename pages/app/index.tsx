@@ -51,7 +51,11 @@ const App: NextPage = () => {
 
   return (
     <>
-      {/* if auth from appSlice isn't true, showloading state */}
+      {/* if auth from appSlice isn't true, showloading state with reach suspense <React.Suspense fallback={<Spinner size="large" />}>
+  <ArtistDetails id={this.props.id}/>
+  <ArtistTopTracks />
+  <ArtistAlbums id={this.props.id}/>
+</React.Suspense> */}
       <PageTitle
         title="Dashboard"
         button="Create +"
