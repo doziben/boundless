@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import { SetStateAction } from "react";
 import tw from "twin.macro";
 import { _tabState } from "../../pages/app/jobs";
-
 export interface _tabProps {
   stateFn: React.Dispatch<SetStateAction<_tabState[]>>;
   id: "A" | "B" | "C";
@@ -27,6 +26,7 @@ const falseStates: _tabState[] = [
 const TabItem = (props: _tabProps) => {
   return (
     <StyledBtn
+      className={`${props.active() && "tabAnimation"}`}
       active={props.active()}
       onClick={() => {
         props.stateFn(() => {

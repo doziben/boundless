@@ -14,7 +14,6 @@ import Help from "../dashboard/help";
 import AccountWidget from "../dashboard/accountWidget";
 import useAppSelector from "../../hooks/useAppSelector";
 import AuthWatcher from "../../utils/authWatcher";
-// import StateWatcher from "../../utils/stateWatcher";
 
 type _props = {
   children: React.ReactNode;
@@ -27,10 +26,10 @@ const Header = (props: _props) => {
 
   const authState = appStore.auth;
 
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(authState);
   const [showNav, setShowNav] = useState<boolean>(false);
   const router = useRouter();
 
+  //* Handling Mobile Navigation *//
   const navHandler = (e: React.MouseEvent) => {
     setShowNav((prevState) => {
       return !prevState;
@@ -41,6 +40,7 @@ const Header = (props: _props) => {
   //show on mobile hidden md:show
   const ResponsiveDiv = tw.div`justify-between w-full hidden items-center md:flex`;
 
+  //** STYLES */
   interface ContainerProps {
     hasBg?: string;
   }
@@ -94,14 +94,15 @@ const Header = (props: _props) => {
     </>
   );
 
+  //** Making sure there's no header on the login page */
   let loginState =
     router.pathname === "/auth/register" || router.pathname === "/auth/login";
 
   return (
     <headerCtx.Provider
       value={{
-        isLoggedIn: isLoggedIn,
-        setIsLoggedIn: setIsLoggedIn,
+        isLoggedIn: authState,
+        setIsLoggedIn: () => {},
       }}
     >
       {!loginState && (
@@ -112,7 +113,7 @@ const Header = (props: _props) => {
             </div>
 
             <nav tw="flex items-center flex-[3]">
-              {isLoggedIn ? logged : notLogged}
+              {authState ? logged : notLogged}
             </nav>
           </div>
         </header>

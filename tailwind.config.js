@@ -1,6 +1,8 @@
 const colors = require("tailwindcss/colors");
 
 module.exports = {
+  mode: "jit",
+  important: true,
   purge: [],
   presets: [],
   darkMode: false, // or 'media' or 'class'
@@ -1030,6 +1032,20 @@ module.exports = {
     width: ["responsive"],
     wordBreak: ["responsive"],
     zIndex: ["responsive", "focus-within", "focus"],
+    extend: {
+      boxShadow: {
+        xs: "0px 4px 20px 0px rgba(172, 174, 186, 0.12)",
+      },
+      animation: {
+        tab: "tab 1s ease-in-out",
+      },
+      keyframes: {
+        tab: {
+          "0%": { transform: "translateX(-500px)" },
+          "100%": { transform: "translateX(0)" },
+        },
+      },
+    },
   },
   plugins: [],
 };

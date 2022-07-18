@@ -92,7 +92,7 @@ const HiresStats = () => {
             <Bar dataKey="hires" fill="#F1B980" radius={[100, 100, 0, 0]} />
             <XAxis dataKey="name" />
             {/* <YAxis dataKey="amt" /> */}
-            <Tooltip />
+            {/* <Tooltip />  Style this*/}
           </BarChart>
         </ResponsiveContainer>
       </StyledDiv>

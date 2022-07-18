@@ -34,7 +34,7 @@ const JobItem = (props: _jobProps) => {
   let tags = props.tags.map((tag) => <JobTag key={tag} title={tag} />);
 
   return (
-    <StyledDiv>
+    <StyledDiv className="entrance">
       <ParentDiv jobOpen={jobStatus}>
         <Flex>
           <JobIcon state={props.status} />

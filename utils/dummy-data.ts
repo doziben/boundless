@@ -51,6 +51,9 @@ const tagStats: string[] = [
   "Graphics",
   "Animation",
   "TailwindCSS",
+  "Express.js",
+  "React Native",
+  "Node",
 ];
 
 export { schedules, jobs, tagStats };

@@ -6,6 +6,7 @@ import Head from "next/head";
 import { Provider } from "react-redux";
 import { store } from "../utils/store";
 import StateWatcher from "../utils/stateWatcher";
+import "../utils/TabAnimation.css";
 
 const NProgress = require("nprogress");
 

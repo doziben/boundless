@@ -15,11 +15,11 @@ import TagStats from "../../components/dashboard/tagStats";
 import { jobs, schedules, tagStats } from "../../utils/dummy-data";
 
 //STYLES
-const CardDiv = tw.div`bg-white shadow rounded-xl p-6`;
+const CardDiv = tw.div`bg-white rounded-xl p-6 border`;
 const JobStatDiv = tw(CardDiv)`flex-[1]`;
 const ScheduleDiv = tw(CardDiv)`flex-[2]`;
 
-const HiresDiv = tw(CardDiv)`flex-[3]`;
+const HiresDiv = tw(CardDiv)`flex-[3] flex flex-col justify-between`;
 const TagsDiv = tw(CardDiv)`flex-[1]`;
 
 const Flex = tw.div`flex flex-col gap-4 md:(flex-row justify-between)`;

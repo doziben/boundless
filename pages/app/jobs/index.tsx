@@ -123,8 +123,7 @@ const Jobs: NextPage = () => {
       <AppWrapper ignoreMargin>
         <Card type="full">
           <Flex spaceBetween margin colMobile>
-            <CardHeading>{tabTitle}</CardHeading>
-            <Flex gap>
+            <div tw=" w-full flex justify-end gap-4">
               <SelectMenu title="2022" />
               <SearchBar
                 onSearch={(e) => {
@@ -132,7 +131,7 @@ const Jobs: NextPage = () => {
                 }}
                 placeholder="Search in jobs..."
               />
-            </Flex>
+            </div>
           </Flex>
 
           <div tw="flex flex-col gap-5 w-full">
